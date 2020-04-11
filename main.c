@@ -24,10 +24,7 @@ long *Array_Load_From_File(char *filename, int *size)
 		fclose(fp);
 		return arr;
 	}
-
 	fread(arr, sizeof(long), *size, fp);
-	//for(int i =0;i<1000;i++)
-	//	{printf("%ld\n", arr[i]);}
 	fclose(fp);
 	return arr;
 
@@ -35,7 +32,7 @@ long *Array_Load_From_File(char *filename, int *size)
 
 int Array_Save_To_File(char *filename, long *array, int size)
 {
-	FILE *fp = fopen(filename, "wb");
+	FILE *fp = fopen(filename, "wb+");
 	int count = 0;
 
 	for(int indx = 0; indx < size; indx++)
@@ -50,9 +47,39 @@ int Array_Save_To_File(char *filename, long *array, int size)
 	return count;
 }
 
+void issorted(long *array, int size)
+{
+	for(int i = 0; i < size-1; i++)
+	{
+		if(array[i] > array[i+1])
+		{
+			printf("%d:%ld,%d:%ld\n", i, array[i], i+1, array[i+1]);
+			printf("not sorted\n");
+			return;
+		}
+	}
+	printf("sorted\n");
+}
+
 int main(int argc, char** argv)
 {
-    
+	int size = 0;
+	long *array = Array_Load_From_File(argv[2], &size);
+	issorted(array, size);
+	printf("size = %d\n", size);
+	if(!strcmp(argv[1], "-m"))
+	{
+		Merge_Sort(array, size);	
+	}
+	if(!strcmp(argv[1],"-q"))
+	{
+		Quick_Sort(array, size);
+	}
+	
+	issorted(array, size);
 
 	return EXIT_SUCCESS;
 }
+
+
+
