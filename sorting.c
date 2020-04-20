@@ -57,6 +57,10 @@ void msort(long *array, long *temp, int l, int r, int which)
 void Merge_Sort(long *Array, int Size)
 {
 	long *temp = malloc(Size * sizeof(long));
+	for(int i = 0; i < Size; i++)
+	{
+		temp[i] = 0;
+	}
 	msort(Array, temp, 0, Size - 1,0);
 	free(temp);
 }

@@ -77,7 +77,7 @@ int main(int argc, char** argv)
 	}
 	
 	issorted(array, size);
-
+	free(array);
 	return EXIT_SUCCESS;
 }
 
