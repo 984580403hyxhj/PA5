@@ -64,10 +64,10 @@ void Merge_Sort(long *Array, int Size)
 
 int partition(long *array, int lb, int ub)
 {
-	int pivot = array[lb];
+	long pivot = array[lb];
 	int l = lb;
 	int r = ub;
-	int temp;
+	long temp;
 	while(l < r)
 	{
 		while(array[l] <= pivot && l < r)
@@ -92,12 +92,21 @@ int partition(long *array, int lb, int ub)
 	
 }
 
+void printarray(long *array,int size)
+{
+	for(int i = 0; i < size; i++)
+	{
+		printf("%ld.  ", array[i]);
+	}
+	printf("\n");
+}
+
 void q_sort(long *array, int lb, int ub)
 {
 	if(ub <= lb) return;
 
 	int pivotloc = partition(array, lb, ub);
-	printf("%d\n", pivotloc);
+	//printarray(array, 20);
 	q_sort(array, lb, pivotloc-1);
 	q_sort(array, pivotloc+1, ub);
 }
